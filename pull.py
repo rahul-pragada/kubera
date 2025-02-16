@@ -13,3 +13,6 @@ for stock in stocks:
         print(f"{stock}: ₹{quote['lastPrice']}")
     except Exception as e:
         print(f"Could not fetch data for {stock}: {e}")
+
+
+# code from anand
