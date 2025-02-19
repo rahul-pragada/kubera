@@ -3,6 +3,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+from scraputils.sector_company_list import fetch_sector_list
+
+
 sectors=["Aerospace & Defence","Agro Chemicals","Air Transport Service","Alcoholic Beverages","Auto Ancillaries","Automobile",
 "Banks","Bearings","Cables","Capital Goods - Electrical Equipment","Capital Goods-Non Electrical Equipment",
 "Castings, Forgings & Fastners","Cement","Cement - Products","Ceramic Products","Chemicals","Computer Education","Construction","Consumer Durables",
@@ -15,22 +18,6 @@ sectors=["Aerospace & Defence","Agro Chemicals","Air Transport Service","Alcohol
 "Realty","Refineries","Refractories","Retail","Sanitaryware","Ship Building","Shipping","Steel","Stock/ Commodity Brokers","Sugar","Telecom-Handsets/Mobile",
 "Telecomm Equipment & Infra Services","Telecomm-Service","Textiles","Tobacco Products","Trading","Tyres"]
 
-st.markdown("""
-    <style>
-        .left-pane {
-            background-color: #ADD8E6; /* Light Blue */
-            padding: 20px;
-            border-radius: 10px;
-            height: 100vh;
-        }
-        .right-pane {
-            background-color: #F5F5F5; /* Light Gray */
-            padding: 20px;
-            border-radius: 10px;
-            height: 100vh;
-        }
-    </style>
-""", unsafe_allow_html=True)
 
 
 # Create two columns (20% width for left, 80% for right)
@@ -43,10 +30,10 @@ with left_col:
     menu_option = st.radio("Choose an option:", sectors)
     st.markdown("</div>", unsafe_allow_html=True)
 
-# # Right panel - Content
-# with right_col:
-#     st.markdown('<div class="right-pane">', unsafe_allow_html=True)
-#     for i in sectors:
-#         if menu_option == i:
-#             st.write(f"### You selected: {i}")
-#     st.markdown("</div>", unsafe_allow_html=True)
+# Right panel - Content
+with right_col:
+    st.markdown('<div class="right-pane">', unsafe_allow_html=True)
+    for i in sectors:
+        if menu_option == i:
+            st.dataframe(fetch_sector_list())
+    st.markdown("</div>", unsafe_allow_html=True)
